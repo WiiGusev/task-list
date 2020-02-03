@@ -8,7 +8,7 @@ import Toolbar from './toolbar';
 
 
 export default function App() {
-  const [state, dispatch] = useReducer(reducer, JSON.parse(localStorage.getItem('todos')));
+  const [state, dispatch] = useReducer(reducer, JSON.parse(localStorage.getItem('todos')) || []);
   const [todos, setTodos] = useState(state);
   const [task, setTask] = useState({name: '', description: ''});
   const [open, setOpen] = useState(false);
@@ -45,8 +45,8 @@ export default function App() {
   
   return (
     <Context.Provider value={{dispatch}}>
+      <Toolbar onClick={handleClickModal} onChangeSearch={handleChangeSearchInput}/>
       <Container>
-        <Toolbar onClick={handleClickModal} onChangeSearch={handleChangeSearchInput}/>
         <AddTaskModal
           task={task}
           setTask={setTask}
